@@ -87,7 +87,7 @@ public class SplashActivity extends AppCompatActivity {
                                         Log.v("SYSTEM", "After search Sys ID is" +
                                                 String.valueOf(identifier));
 
-                                        /* Need to register a new System */
+                                        /* Need to register a new System because it wasn't found */
                                         if (identifier == -1) {
                                             registerNewSystem();
                                         } else {
@@ -116,6 +116,7 @@ public class SplashActivity extends AppCompatActivity {
                 SERVICE_OPT;
         JSONObject postData = new JSONObject();
         try {
+            /* We will use fake values as it should not be reachable... */
             postData.put("address", "127.0.0.1");
             postData.put("port", 0);
             postData.put("systemName", MY_SYSTEM_NAME);
@@ -167,8 +168,8 @@ public class SplashActivity extends AppCompatActivity {
                                 if (data.length() > 0) {
                                     final JSONObject service = data.getJSONObject(0);
                                     final JSONObject provider = service.getJSONObject("provider");
-                                    String address = provider.getString("address");
-                                    address = "https://ahtwp4demo-default-rtdb.firebaseio.com/";
+                                    String address =
+                                            "https://" + provider.getString("address");
 
                                     if (FirebaseDatabase.getInstance(address) != null) {
                                         Intent i = new Intent(getApplicationContext(),
@@ -183,6 +184,10 @@ public class SplashActivity extends AppCompatActivity {
                                                 "No database found",
                                                 Toast.LENGTH_SHORT).show();
                                     }
+                                } else {
+                                    Toast.makeText(getApplicationContext(),
+                                            "No persister found on Service Registry",
+                                            Toast.LENGTH_LONG).show();
                                 }
 
                             } catch (JSONException e) {

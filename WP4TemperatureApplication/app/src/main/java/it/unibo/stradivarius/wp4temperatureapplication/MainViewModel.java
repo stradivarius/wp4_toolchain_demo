@@ -37,6 +37,8 @@ public class MainViewModel extends AndroidViewModel {
     static final String CONFIGURATION_TAG = "config";
     static final String TEMPERATURE_TAG = "Temperature";
     static final String SERVICE_REGISTRY_URL = "http://137.204.57.93:8443/";
+    static final String ORCHESTRATION_URL = "http://137.204.57.93:8441/";
+    static final String GET_ORCHESTRATION = "orchestrator/orchestration/";
     static final String GET_SERVICES = "serviceregistry/mgmt/servicedef/";
     static final String GET_SYSTEMS = "serviceregistry/mgmt/systems/";
     static final String SERVICE_DEFINITION = "wp4demo-configuration";
@@ -59,16 +61,22 @@ public class MainViewModel extends AndroidViewModel {
     private MutableLiveData<TemperatureDataPoint> tempPoint;
     private MutableLiveData<Integer> configuration;
     private MutableLiveData<String> serviceAddress;
+    private boolean serviceAvailable;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
 
         //mDatabase = FirebaseDatabase.getInstance();
         //checkDatabase();
+        this.serviceAvailable = false;
     }
 
     public void instantiateDb(String address) {
         mDatabase = FirebaseDatabase.getInstance(address);
+    }
+
+    public boolean isServiceAvailable() {
+        return serviceAvailable;
     }
 
     public LiveData<Integer> getConfiguration () {
@@ -162,6 +170,7 @@ public class MainViewModel extends AndroidViewModel {
                                     String completeURL = "http://" +
                                             address + ":" + String.valueOf(port) + "/" + serviceUri;
                                     serviceAddress.postValue(completeURL);
+                                    serviceAvailable = true;
                                 }
                             } catch (JSONException e) {
                                 serviceAddress.postValue("Parsing error");
@@ -177,6 +186,51 @@ public class MainViewModel extends AndroidViewModel {
         });
         queue.add(stringRequest);
     }
+
+
+    public void  UpdateOrchestrationAddress() {
+        /* Volley Request */
+        RequestQueue queue = Volley.newRequestQueue(getApplication().getApplicationContext());
+        String url = ORCHESTRATION_URL +
+                GET_ORCHESTRATION +
+                String.valueOf(this.systemId);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("VOLLEY", response);
+
+                        /* I'm doing this in background and updating the Live Data accordingly */
+                        ArrowheadExecutor.execute(() -> {
+                            try {
+                                JSONObject jObject = new JSONObject(response);
+                                final JSONArray data = jObject.getJSONArray("response");
+                                if (data.length() > 0) {
+                                    final JSONObject service = data.getJSONObject(0);
+                                    final JSONObject provider = service.getJSONObject("provider");
+                                    String address = provider.getString("address");
+                                    int port = provider.getInt("port");
+                                    String serviceUri = service.getString("serviceUri");
+                                    String completeURL = "http://" +
+                                            address + ":" + String.valueOf(port) + "/" + serviceUri;
+                                    serviceAddress.postValue(completeURL);
+                                    serviceAvailable = true;
+                                }
+                            } catch (JSONException e) {
+                                serviceAddress.postValue("Parsing error");
+                            }
+                        });
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("VOLLEY ERROR", error.getMessage());
+                serviceAddress.postValue("Network error");
+            }
+        });
+        queue.add(stringRequest);
+    }
+
 
     public void pushConfiguration(int samplingTime) throws NetworkErrorException {
         RequestQueue queue = Volley.newRequestQueue(getApplication().getApplicationContext());

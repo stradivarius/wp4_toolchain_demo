@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graph"
         android:layout_width="match_parent"
@@ -49,23 +56,14 @@
 
     <Button
         android:id="@+id/button_push_config"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
         android:background="@color/colorPrimary"
         android:text="Send"
         app:layout_constraintBottom_toBottomOf="@+id/suggConfValue"
-        app:layout_constraintEnd_toEndOf="@+id/ServiceRegistryButton"
-        app:layout_constraintStart_toStartOf="@+id/ServiceRegistryButton" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="50dp"
-        android:text="Query directly Service Registry:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/suggConfLabel" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="#FFFFFF"/>
 
     <View
         android:id="@+id/divider"
@@ -78,13 +76,16 @@
 
     <Button
         android:id="@+id/ServiceRegistryButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="12dp"
         android:background="@color/colorPrimary"
-        android:text="Refresh"
-        app:layout_constraintBottom_toBottomOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:text="query service registry"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/suggConfLabel"
+        app:layout_constraintTop_toBottomOf="@+id/suggConfLabel" />
 
     <TextView
         android:id="@+id/ServiceRegistryLabel"
@@ -92,9 +93,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="null"
-        app:layout_constraintEnd_toEndOf="@+id/ServiceRegistryButton"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintEnd_toEndOf="@+id/OrchestrationButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/ServiceRegistryButton"
+        app:layout_constraintTop_toBottomOf="@+id/ServiceRegistryButton"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        />
 
     <TextView
         android:id="@+id/textView6"
@@ -113,5 +117,28 @@
         android:text="unknown"
         app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+    <Button
+        android:id="@+id/OrchestrationButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="25dp"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFFFFF"
+        android:text="query orchestrator"
+        app:layout_constraintBottom_toBottomOf="@+id/ServiceRegistryButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/ServiceRegistryButton" />
+
+    <TextView
+        android:id="@+id/textSysId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

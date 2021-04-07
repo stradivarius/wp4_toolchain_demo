@@ -11,7 +11,6 @@ import android.Manifest;
 import android.accounts.NetworkErrorException;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -35,9 +34,11 @@ public class MainActivity extends AppCompatActivity {
     private EditText configuration;
     private TextView serviceAddress;
     private TextView lastUpdate;
+    private TextView textSysId;
 
     private Button pushConfig;
     private Button RefreshServiceRegistry;
+    private Button RefreshOrchestration;
 
     private GraphView graph;
     LineGraphSeries<DataPoint> series;
@@ -50,12 +51,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
 
         String databaseAddress = getIntent().getExtras().getString("address");
-        int systemId = getIntent().getExtras().getInt("sysId");
-        Log.v("SYSTEM ID", String.valueOf(systemId));
 
         mViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(
                 this.getApplication()).create(MainViewModel.class);
-        mViewModel.systemId = systemId;
         mViewModel.instantiateDb(databaseAddress);
 
         lastUpdate = findViewById(R.id.last_update_label);
@@ -75,8 +73,14 @@ public class MainActivity extends AppCompatActivity {
         series.setDataPointsRadius(10);
         graph.addSeries(series);
 
+        /* Get System ID */
+        textSysId = findViewById(R.id.textSysId);
+        mViewModel.systemId = getIntent().getExtras().getInt("sysId");
+        textSysId.setText("System ID: " + String.valueOf(mViewModel.systemId));
+
         /* Pushing configuration */
         pushConfig = findViewById(R.id.button_push_config);
+        pushConfig.setEnabled(false);
         pushConfig.setOnClickListener(v -> {
             try {
                 mViewModel.pushConfiguration(Integer.parseInt(configuration.getText().toString()));
@@ -86,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /* Refreshing the Service Registry here */
         serviceAddress = findViewById(R.id.ServiceRegistryLabel);
+        /* Refreshing the Service Registry here */
         RefreshServiceRegistry = findViewById(R.id.ServiceRegistryButton);
         RefreshServiceRegistry.setOnClickListener(v -> {
             if (ContextCompat.checkSelfPermission(getApplicationContext(),
@@ -95,6 +99,16 @@ public class MainActivity extends AppCompatActivity {
                 requestPermissions();
             } else {
                 mViewModel.UpdateServiceRegistryAddress();
+            }
+        });
+        /* Refreshing the orchestration here */
+        RefreshOrchestration = findViewById(R.id.OrchestrationButton);
+        RefreshOrchestration.setOnClickListener(v -> {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                    Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions();
+            } else {
+                mViewModel.UpdateOrchestrationAddress();
             }
         });
     }
@@ -115,6 +129,9 @@ public class MainActivity extends AppCompatActivity {
         mViewModel.getServiceAddress().observe(this, s -> {
             if (s != null) {
                 serviceAddress.setText(s);
+                if (mViewModel.isServiceAvailable()) {
+                    pushConfig.setEnabled(true);
+                }
             }
         });
 
