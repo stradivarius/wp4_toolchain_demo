@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "553344604981",
+    "firebase_url": "https://ahtwp4demo-default-rtdb.firebaseio.com",
+    "project_id": "ahtwp4demo",
+    "storage_bucket": "ahtwp4demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553344604981:android:687e2c42e3fee6c8f74a7c",
+        "android_client_info": {
+          "package_name": "it.unibo.stradivarius.wp4temperatureapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553344604981-2g49b1la04bfmo4q0imb6s301qg1t5ja.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "it.unibo.stradivarius.wp4temperatureapplication",
+            "certificate_hash": "bda0f4dc866a436d51ddda281dcc060f8b290f46"
+          }
+        },
+        {
+          "client_id": "553344604981-g89n8io9fn1ik36rk5slftsvouvtj0re.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBe-cHBK9b41dkUbajFoIgVvwmOrXqmN50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "553344604981-g89n8io9fn1ik36rk5slftsvouvtj0re.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
