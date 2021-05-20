@@ -25,7 +25,10 @@ class ArrowheadConnector:
         }
         r = requests.post(self.service_registry_address +
                           '/serviceregistry/register', json=payload)
-        print(r.json())
+        try: 
+            print(r.json())
+        except:
+            print("Error when decoding response from Arrowhead. Make sure the address you provided hosts Eclipse Arrowhead.")
 
     # Unregister the Arrowhead Service
     def unregister_service(self, service_name="wp4demo-temperature"):
