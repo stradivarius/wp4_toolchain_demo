@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/rodol/Desktop/tesi/arrowheadDemo/app/src/main/res/drawable/ic_launcher_background.xml" value="0.124" />
+        <entry key="..\:/Users/rodol/Desktop/tesi/arrowheadDemo/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.124" />
+        <entry key="..\:/Users/rodol/Desktop/tesi/arrowheadDemo/app/src/main/res/drawable/ic_save.xml" value="0.154" />
+        <entry key="..\:/Users/rodol/Desktop/tesi/arrowheadDemo/app/src/main/res/drawable/ic_settings.xml" value="0.124" />
+        <entry key="..\:/Users/rodol/Desktop/tesi/arrowheadDemo/app/src/main/res/layout/activity_main.xml" value="0.25025641025641027" />
+        <entry key="..\:/Users/rodol/Desktop/tesi/arrowheadDemo/app/src/main/res/layout/activity_settings.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/rodol/Desktop/tesi/arrowheadDemo/app/src/main/res/layout/content_settings.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/rodol/Desktop/tesi/arrowheaddemo2/app/src/main/res/layout/activity_main.xml" value="0.11302083333333333" />
+        <entry key="..\:/Users/rodol/Desktop/tesi/demo/android/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/rodol/Desktop/tesi/demo/android/app/src/main/res/layout/activity_settings.xml" value="0.25416666666666665" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

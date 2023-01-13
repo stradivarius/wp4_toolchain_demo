@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="blu_20">#004676</color>
+    <color name="blu_40">#336B91</color>
+    <color name="blu_60">#7FA2BA</color>
+
+    <color name="light_blu_20">#1a82a3</color>
+    <color name="light_blu_40">#479BB5</color>
+    <color name="light_blu_60">#75B4C7</color>
+
+    <color name="red">#db2424</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+</resources>

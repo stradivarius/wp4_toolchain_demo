@@ -1,4 +1,10 @@
-# Arrowhead_demo
+# wp4_toolchain_demo
+
+## WP4 Provider deployment
+
+To perform the steps below, you have to enter the directory with provider using
+
+`cd WP4Provider`
 
 First, install the required dependencies for python using
 
@@ -7,7 +13,5 @@ First, install the required dependencies for python using
 After that, set up the IP addresses of your Arrowhead Service Registry and your provider in the `config.py` file.
 
 Now, you should start the program with 
-`python3 sensor.py`
-`python3 database.py`
 
-In the files tesi.pdf e presentazione.pdf you will find further information in Italian
+`python3 provider.py`

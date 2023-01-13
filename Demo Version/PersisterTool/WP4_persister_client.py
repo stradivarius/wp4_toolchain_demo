@@ -125,7 +125,7 @@ timestamp = datetime.utcnow().replace(microsecond=0).isoformat()
 query = {'timestamp':timestamp}
 
 # Initalize pointer to database °°° My firebase is at https://ahtwp4demo-default-rtdb.firebaseio.com/
-db = firebase.FirebaseApplication('YOUR_OWN_FIREBASE', None)
+db = firebase.FirebaseApplication('https://ahtwp4demo-default-rtdb.firebaseio.com/', None)
 fireResult = db.put('/', "config", 2)
 
 # Register the Arrowhead Service
